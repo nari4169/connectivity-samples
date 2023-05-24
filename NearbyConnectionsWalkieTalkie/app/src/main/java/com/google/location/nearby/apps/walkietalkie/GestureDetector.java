@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Detects HOLD for {@link KeyEvent}s. Pass the interesting key codes to GestureDetector in its
- * constructor and then forward all key events to {@link GestureDetector#onKeyEvent(KeyEvent)}.
- * Multiple key codes are fine as long as they're mutually exclusive (eg. Volume Up + Volume Down).
+ * {@link KeyEvent}의 HOLD를 감지합니다. 흥미로운 키 코드를 GestureDetector에 전달합니다.
+ * 생성자를 생성한 다음 모든 키 이벤트를 {@link GestureDetector#onKeyEvent(KeyEvent)}로 전달합니다.
+ * 여러 개의 키 코드는 상호 배타적인 한 괜찮습니다(예: 볼륨 크게 + 볼륨 작게).
  */
 public class GestureDetector {
   /**

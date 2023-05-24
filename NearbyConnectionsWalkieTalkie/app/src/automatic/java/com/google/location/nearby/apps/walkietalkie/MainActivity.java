@@ -11,6 +11,7 @@ import android.os.ParcelFileDescriptor;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 import androidx.core.content.ContextCompat;
@@ -31,35 +32,36 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Our WalkieTalkie Activity. This Activity has 3 {@link State}s.
+ * 워키토키 활동. 이 활동에는 3개의 {@link State}가 있습니다.
  *
- * <p>{@link State#UNKNOWN}: We cannot do anything while we're in this state. The app is likely in
- * the background.
+ * <p>{@link State#UNKNOWN}: 이 상태에서는 아무것도 할 수 없습니다. 앱은 다음 위치에 있을 가능성이 높습니다.
+ * 배경.
  *
- * <p>{@link State#SEARCHING}: Our default state (after we've connected). We constantly listen for a
- * device to advertise near us, while simultaneously advertising ourselves.
+ * <p>{@link State#SEARCHING}: 기본 상태(연결 후). 우리는 지속적으로
+ * 우리 주변에서 광고하는 동시에 우리 자신을 광고하는 장치.
  *
- * <p>{@link State#CONNECTED}: We've connected to another device and can now talk to them by holding
- * down the volume keys and speaking into the phone. Advertising and discovery have both stopped.
+ * <p>{@link State#CONNECTED}: 다른 기기에 연결했으며 이제 길게 눌러 대화할 수 있습니다.
+ * 볼륨 키를 누르고 전화기에 대고 말하십시오. 광고와 검색이 모두 중단되었습니다.
  */
+@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
 public class MainActivity extends ConnectionsActivity {
-  /** If true, debug logs are shown on the device. */
+  /** true인 경우 디바이스에 디버그 로그가 표시됩니다. */
   private static final boolean DEBUG = true;
 
   /**
-   * The connection strategy we'll use for Nearby Connections. In this case, we've decided on
-   * P2P_STAR, which is a combination of Bluetooth Classic and WiFi Hotspots.
+   * Nearby Connections에 사용할 연결 전략입니다. 이 경우 결정했습니다.
+   * 블루투스 클래식과 와이파이 핫스팟의 조합인 P2P_STAR.
    */
   private static final Strategy STRATEGY = Strategy.P2P_STAR;
 
-  /** Length of state change animations. */
+  /** 상태 변경 애니메이션의 길이.*/
   private static final long ANIMATION_DURATION = 600;
 
   /**
-   * A set of background colors. We'll hash the authentication token we get from connecting to a
-   * device to pick a color randomly from this list. Devices with the same background color are
-   * talking to each other securely (with 1/COLORS.length chance of collision with another pair of
-   * devices).
+   * 배경색 세트. 연결에서 얻은 인증 토큰을 해시합니다.
+   * 이 목록에서 임의로 색상을 선택하는 장치. 배경색이 같은 장치는
+   * 서로 안전하게 대화하기(1/COLORS.length 다른 쌍과 충돌 가능성 있음)
+   * 장치).
    */
   @ColorInt
   private static final int[] COLORS =
@@ -74,24 +76,24 @@ public class MainActivity extends ConnectionsActivity {
       };
 
   /**
-   * This service id lets us find other nearby devices that are interested in the same thing. Our
-   * sample does exactly one thing, so we hardcode the ID.
+   * 이 서비스 ID를 통해 같은 것에 관심이 있는 주변의 다른 장치를 찾을 수 있습니다. 우리의
+   * 샘플은 정확히 한 가지 작업을 수행하므로 ID를 하드코딩합니다.
    */
   private static final String SERVICE_ID =
       "com.google.location.nearby.apps.walkietalkie.automatic.SERVICE_ID";
 
   /**
-   * The state of the app. As the app changes states, the UI will update and advertising/discovery
-   * will start/stop.
+   * 앱의 상태. 앱이 상태를 변경하면 UI가 업데이트되고 광고/발견됩니다.
+   * 시작/중지합니다.
    */
   private State mState = State.UNKNOWN;
 
-  /** A random UID used as this device's endpoint name. */
+  /** 이 장치의 끝점 이름으로 사용되는 임의의 UID입니다. */
   private String mName;
 
   /**
-   * The background color of the 'CONNECTED' state. This is randomly chosen from the {@link #COLORS}
-   * list, based off the authentication token.
+   * 'CONNECTED' 상태의 배경색. 이것은 {@link #COLORS}에서 무작위로 선택됩니다.
+   * 인증 토큰을 기반으로 하는 목록입니다.
    */
   @ColorInt private int mConnectedColor = COLORS[0];
 

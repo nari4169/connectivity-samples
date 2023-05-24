@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ import java.util.Set;
 import static com.google.location.nearby.apps.walkietalkie.Constants.TAG;
 
 /** A class that connects to Nearby Connections and provides convenience methods and callbacks. */
+@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
 public abstract class ConnectionsActivity extends AppCompatActivity {
 
   /**
@@ -59,6 +61,7 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
             Manifest.permission.CHANGE_WIFI_STATE,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.NEARBY_WIFI_DEVICES,
           };
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
       REQUIRED_PERMISSIONS =
@@ -553,22 +556,22 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
 
   @CallSuper
   protected void logV(String msg) {
-    Log.v(TAG, msg);
+    Log.e(TAG, msg);
   }
 
   @CallSuper
   protected void logD(String msg) {
-    Log.d(TAG, msg);
+    Log.e(TAG, msg);
   }
 
   @CallSuper
   protected void logW(String msg) {
-    Log.w(TAG, msg);
+    Log.e(TAG, msg);
   }
 
   @CallSuper
   protected void logW(String msg, Throwable e) {
-    Log.w(TAG, msg, e);
+    Log.e(TAG, msg, e);
   }
 
   @CallSuper

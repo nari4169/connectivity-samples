@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    namespace 'com.google.location.nearby.apps.walkietalkie'
+    compileSdkVersion 33
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -25,10 +26,10 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-nearby:18.0.1'
+    implementation 'com.google.android.gms:play-services-nearby:18.5.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
