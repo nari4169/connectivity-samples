@@ -19,7 +19,7 @@ package com.example.android.bluetoothlegatt
  * This class includes a small subset of standard GATT attributes for demonstration purposes.
  */
 object SampleGattAttributes {
-    private val attributes: HashMap<String?, String?> = HashMap<String?, String?>()
+    private val attributes: HashMap<String?, String?> = HashMap()
     @JvmField
     var HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb"
     @JvmField

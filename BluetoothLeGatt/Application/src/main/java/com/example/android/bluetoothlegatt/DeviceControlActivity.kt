@@ -15,7 +15,7 @@
  */
 package com.example.android.bluetoothlegatt
 
-import android.app.Activity
+import android.app.ListActivity
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattService
 import android.content.BroadcastReceiver
@@ -42,7 +42,7 @@ import com.example.android.bluetoothlegatt.BluetoothLeService.LocalBinder
  * communicates with `BluetoothLeService`, which in turn interacts with the
  * Bluetooth LE API.
  */
-class DeviceControlActivity : Activity() {
+class DeviceControlActivity : ListActivity() {
     private var mConnectionState: TextView? = null
     private var mDataField: TextView? = null
     private var mDeviceName: String? = null

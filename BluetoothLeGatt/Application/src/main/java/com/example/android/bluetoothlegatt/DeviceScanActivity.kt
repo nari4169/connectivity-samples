@@ -24,6 +24,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -33,16 +34,23 @@ import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.android.bluetoothlegatt.DeviceControlActivity
 
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-class DeviceScanActivity : ListActivity() {
+class DeviceScanActivity : AppCompatActivity() {
+
+    var TAG = ""
+
     private var mLeDeviceListAdapter: LeDeviceListAdapter? = null
     private var mBluetoothAdapter: BluetoothAdapter? = null
     private var mScanning = false
     private var mHandler: Handler? = null
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         actionBar!!.setTitle(R.string.title_devices)
