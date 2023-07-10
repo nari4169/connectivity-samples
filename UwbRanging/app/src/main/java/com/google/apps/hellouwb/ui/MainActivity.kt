@@ -26,6 +26,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import com.google.apps.hellouwb.HelloUwbApplication
 
 
@@ -103,6 +104,7 @@ class MainActivity : ComponentActivity() {
         Manifest.permission.UWB_RANGING
       )
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private val PERMISSIONS_REQUIRED_T =
       arrayOf(
         Manifest.permission.NEARBY_WIFI_DEVICES,
